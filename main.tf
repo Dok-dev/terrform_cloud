@@ -19,6 +19,17 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
+resource "aws_instance" "netology-ec2" {
+  # ссылка на data с подбором образа
+  ami           = data.aws_ami.ubuntu.id
+  # тип машины
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "Netology"
+
+  }
+}
 
 # для получения доступа к данным авторизации (Account ID, User ID, and ARN)
 data "aws_caller_identity" "current" {}
